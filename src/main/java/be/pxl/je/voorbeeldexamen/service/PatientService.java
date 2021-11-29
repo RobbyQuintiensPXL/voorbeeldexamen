@@ -103,7 +103,8 @@ public class PatientService {
     }
 
     public List<PatientDto> getAllPositiveTestPatients(){
-        return virusTestRepository.findAllByTestStatus(TestStatus.POSITIVE)
+        Doctor doctor = getDocterByUserName(getUser());
+        return virusTestRepository.findAllByTestStatusAndPatient_Doctor(TestStatus.POSITIVE, doctor)
                 .stream()
                 .map(VirusTest::getPatient)
                 .map(PatientDto::new)
