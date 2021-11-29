@@ -4,14 +4,18 @@ import be.pxl.je.voorbeeldexamen.Exception.BusinessException;
 import be.pxl.je.voorbeeldexamen.dto.PatientDto;
 import be.pxl.je.voorbeeldexamen.entity.Doctor;
 import be.pxl.je.voorbeeldexamen.entity.Patient;
+import be.pxl.je.voorbeeldexamen.entity.TestStatus;
+import be.pxl.je.voorbeeldexamen.entity.VirusTest;
 import be.pxl.je.voorbeeldexamen.repository.DoctorRepository;
 import be.pxl.je.voorbeeldexamen.repository.PatientRepository;
+import be.pxl.je.voorbeeldexamen.repository.VirusTestRepository;
 import be.pxl.je.voorbeeldexamen.resource.PatientResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collector;
@@ -25,6 +29,9 @@ public class PatientService {
 
     @Autowired
     private DoctorRepository doctorRepository;
+
+    @Autowired
+    private VirusTestRepository virusTestRepository;
 
     public String getUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -70,6 +77,7 @@ public class PatientService {
         patientRepository.delete(foundPatient.get());
     }
 
+    @Transactional
     public void updatePatient(Long id, PatientResource patientResource){
         Doctor doctor = getDocterByUserName(getUser());
         Optional<Patient> foundPatient = patientRepository.findById(id);
@@ -94,7 +102,12 @@ public class PatientService {
         return foundDoctor.get();
     }
 
-
-
+    public List<PatientDto> getAllPositiveTestPatients(){
+        return virusTestRepository.findAllByTestStatus(TestStatus.POSITIVE)
+                .stream()
+                .map(VirusTest::getPatient)
+                .map(PatientDto::new)
+                .collect(Collectors.toList());
+    }
 
 }

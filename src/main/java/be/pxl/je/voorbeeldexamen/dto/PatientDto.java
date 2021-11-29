@@ -1,6 +1,10 @@
 package be.pxl.je.voorbeeldexamen.dto;
 
 import be.pxl.je.voorbeeldexamen.entity.Patient;
+import be.pxl.je.voorbeeldexamen.entity.VirusTest;
+
+import java.util.List;
+import java.util.Set;
 
 public class PatientDto {
 
@@ -8,12 +12,14 @@ public class PatientDto {
     private final String firstName;
     private final String lastName;
     private final String username;
+    private final Set<VirusTest> virusTests;
 
     public PatientDto(Patient patient) {
         this.id = patient.getId();
         this.firstName = patient.getFirstName();
         this.lastName = patient.getLastName();
         this.username = patient.getUsername();
+        this.virusTests = patient.getVirusTests();
     }
 
     public Long getId() {
@@ -28,7 +34,11 @@ public class PatientDto {
         return lastName;
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return username;
+    }
+
+    public Set<VirusTest> getVirusTests() {
+        return virusTests;
     }
 }

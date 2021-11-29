@@ -50,7 +50,9 @@ public class PatientController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-
+    @GetMapping("/positives")
+    public List<PatientDto> getAllPositivePatiens(){
+        return patientService.getAllPositiveTestPatients();
+    }
 
 }

@@ -1,7 +1,10 @@
 package be.pxl.je.voorbeeldexamen.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "patients")
@@ -23,6 +26,10 @@ public class Patient {
     @ManyToOne
     @JoinColumn(name="doctor_id")
     private Doctor doctor;
+
+    @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
+    private Set<VirusTest> virusTests;
+
 
     public Patient() {
     }
@@ -65,5 +72,13 @@ public class Patient {
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
+    }
+
+    public Set<VirusTest> getVirusTests() {
+        return virusTests;
+    }
+
+    public void setVirusTests(Set<VirusTest> virusTests) {
+        this.virusTests = virusTests;
     }
 }
