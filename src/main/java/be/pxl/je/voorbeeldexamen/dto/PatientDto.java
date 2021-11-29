@@ -7,13 +7,13 @@ public class PatientDto {
     private final Long id;
     private final String firstName;
     private final String lastName;
-    private final String email;
+    private final String username;
 
     public PatientDto(Patient patient) {
         this.id = patient.getId();
         this.firstName = patient.getFirstName();
         this.lastName = patient.getLastName();
-        this.email = patient.getEmail();
+        this.username = patient.getUsername();
     }
 
     public Long getId() {
@@ -28,7 +28,7 @@ public class PatientDto {
         return lastName;
     }
 
-    public String getEmail(){
-        return email;
+    public String getUsername(){
+        return username;
     }
 }

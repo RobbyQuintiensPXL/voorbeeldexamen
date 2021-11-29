@@ -10,12 +10,12 @@ public class PatientResource {
     @NotNull
     private final String lastName;
 
-    private final String email;
+    private final String username;
 
-    public PatientResource(@NotNull String firstName, @NotNull String lastName, String email) {
+    public PatientResource(@NotNull String firstName, @NotNull String lastName, String username) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
+        this.username = username;
     }
 
     public String getFirstName() {
@@ -25,4 +25,6 @@ public class PatientResource {
     public String getLastName() {
         return lastName;
     }
+
+    public String getUsername(){ return username;}
 }

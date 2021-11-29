@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 
 @SpringBootApplication
 @EnableGlobalMethodSecurity(securedEnabled = true)
+@ConfigurationPropertiesScan
 public class VoorbeeldexamenApplication {
 
     public static void main(String[] args) {

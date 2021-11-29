@@ -1,7 +1,9 @@
 package be.pxl.je.voorbeeldexamen.entity;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum Role {
-    DOCTOR("Doctor"), PATIENT("patient");
+    ROLE_DOCTOR("Doctor"), ROLE_PATIENT("patient");
     
     private String label;
 
@@ -9,6 +11,7 @@ public enum Role {
         this.label = label;
     }
 
+    @JsonValue
     public String getLabel(){
         return label;
     }

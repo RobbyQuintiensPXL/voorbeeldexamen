@@ -9,14 +9,16 @@ public class Authority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Role role;
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
 
+    private String role;
+
+    @JoinColumn(name = "user")
     @ManyToOne
-    @JoinColumn(name = "doctor")
-    private Doctor doctor;
+    private User user;
 
-    public Authority(){
-
+    public Authority() {
     }
 
     public Long getId() {
@@ -27,19 +29,19 @@ public class Authority {
         this.id = id;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public User getUser() {
+        return user;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

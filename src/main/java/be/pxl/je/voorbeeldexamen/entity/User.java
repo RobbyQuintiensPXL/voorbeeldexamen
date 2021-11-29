@@ -2,14 +2,17 @@ package be.pxl.je.voorbeeldexamen.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "patients")
-public class Patient {
+@Table(name = "users")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String password;
 
     @Column(name = "username")
     private String username;
@@ -20,11 +23,10 @@ public class Patient {
     @Column(name = "last_name")
     private String lastName;
 
-    @ManyToOne
-    @JoinColumn(name="doctor_id")
-    private Doctor doctor;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Authority> authorities;
 
-    public Patient() {
+    public User() {
     }
 
     public Long getId() {
@@ -33,6 +35,14 @@ public class Patient {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUsername() {
@@ -59,11 +69,11 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public Doctor getDoctor() {
-        return doctor;
+    public List<Authority> getAuthorities() {
+        return authorities;
     }
 
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
     }
 }

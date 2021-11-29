@@ -2,7 +2,9 @@ package be.pxl.je.voorbeeldexamen.service;
 
 import be.pxl.je.voorbeeldexamen.dto.CustomUserDetails;
 import be.pxl.je.voorbeeldexamen.entity.Doctor;
+import be.pxl.je.voorbeeldexamen.entity.User;
 import be.pxl.je.voorbeeldexamen.repository.DoctorRepository;
+import be.pxl.je.voorbeeldexamen.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,14 +17,14 @@ import java.util.function.Supplier;
 public class JPAUserDetailService implements UserDetailsService {
 
     @Autowired
-    private DoctorRepository doctorRepository;
+    private UserRepository userRepository;
 
     @Override
     public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Supplier<UsernameNotFoundException> s =
                 () -> new UsernameNotFoundException("Problem during authentication");
 
-        Doctor d = doctorRepository.findByUsername(username).orElseThrow(s);
+        User d = userRepository.findByUsername(username).orElseThrow(s);
 
         return new CustomUserDetails(d);
     }

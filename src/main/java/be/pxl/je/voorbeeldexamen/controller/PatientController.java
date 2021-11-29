@@ -16,8 +16,12 @@ public class PatientController {
     private PatientService patientService;
 
     @GetMapping("/patients")
-    @Secured({"DOCTOR"})
+    @Secured({"ROLE_DOCTOR"})
+//    public List<PatientDto> GetAllPatients(){
+//        return patientService.getAllPatients();
+//    }
     public List<PatientDto> GetAllPatients(){
-        return patientService.getAllPatients();
+        return patientService.getAllPatientsByDoctor();
     }
+
 }

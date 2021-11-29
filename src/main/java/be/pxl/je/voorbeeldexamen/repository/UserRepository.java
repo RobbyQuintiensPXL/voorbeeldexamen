@@ -1,13 +1,13 @@
 package be.pxl.je.voorbeeldexamen.repository;
 
-import be.pxl.je.voorbeeldexamen.entity.Doctor;
+import be.pxl.je.voorbeeldexamen.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface DoctorRepository extends JpaRepository<Doctor, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<Doctor> findByUsername(String username);
+    Optional<User> findByUsername(String username);
 }
