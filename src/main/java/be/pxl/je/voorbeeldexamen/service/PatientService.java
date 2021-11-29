@@ -77,6 +77,7 @@ public class PatientService {
             throw new BusinessException("Could not find patient");
         }
         Patient patient = new Patient();
+        patient.setId(id);
         patient.setFirstName(patientResource.getFirstName());
         patient.setLastName(patientResource.getLastName());
         patient.setUsername(patientResource.getUsername());
