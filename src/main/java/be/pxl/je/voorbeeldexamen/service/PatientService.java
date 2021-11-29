@@ -70,9 +70,9 @@ public class PatientService {
         patientRepository.delete(foundPatient.get());
     }
 
-    public void updatePatient(PatientResource patientResource){
+    public void updatePatient(Long id, PatientResource patientResource){
         Doctor doctor = getDocterByUserName(getUser());
-        Optional<Patient> foundPatient = patientRepository.findByFirstNameAndLastName(patientResource.getFirstName(), patientResource.getLastName());
+        Optional<Patient> foundPatient = patientRepository.findById(id);
         if(foundPatient.isEmpty()){
             throw new BusinessException("Could not find patient");
         }
